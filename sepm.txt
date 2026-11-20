@@ -1,0 +1,229 @@
+                           SEPML Practical Solutions: Q21, Q22, Q23, Q25
+Q21. Process Model for Online Examination Management System
+Question: Identify requirements, compare suitable process models, select the most appropriate model, justify the
+selection (project size, complexity, risk, customer involvement) and represent its phases and deliverables.
+
+1. Requirements identified
+      No.                                                         Requirement
+    R1          Student registration and login
+    R2          Question bank management (add, edit, categorise questions)
+    R3          Exam scheduling (date, time, duration, batch)
+    R4          Online assessment (timer, auto-submit, random questions)
+    R5          Result generation (marks, reports)
+
+2. Project characteristics (the 4 judging factors)
+                  Factor                                                    Value for this project
+    Size                                  Small to medium (5 modules, 3 to 5 developers)
+    Complexity                            Medium: timer, security, concurrent users
+    Risk                                  Medium: load during exams, cheating, data loss
+    Customer involvement                  High: college staff can review each module
+
+3. Comparison of suitable models
+             Model               Fits?                                                  Reason
+    Waterfall                Weak              Needs all requirements fixed up front; no working software until the end
+    Prototype                Partly            Good for the exam screen look, but not a full delivery plan
+    Spiral                   Overkill          Strong on risk analysis, but costly and heavy for a small project
+    Incremental              BEST              Modules delivered one by one; early feedback; low risk
+    Agile (Scrum)            Good              Also fits, but needs a very active customer every sprint
+
+4. Selected model: Incremental model
+        Size: modules are small and independent, so they can be built one at a time.
+        Complexity: the hard part (online exam) is built after the basics are stable.
+        Risk: each release is tested, so problems show early.
+        Customer involvement: staff use each release and give feedback for the next.
+5. Phases and deliverables
+                     Phase                                     Activities                               Deliverable
+    Communication and planning                 Meet staff, list requirements, plan 3       Requirements list, project plan
+                                               increments
+    Increment 1: Registration and login        Analyse, design, code, test                 Release 1: working login and student
+                                                                                           registration
+    Increment 2: Question bank and             Analyse, design, code, test                 Release 2: question management,
+    scheduling                                                                             exam scheduler
+    Increment 3: Online exam and results       Analyse, design, code, test                 Release 3: timed exam, auto result,
+                                                                                           reports
+    Deployment                                 Install on college server, train staff      Final system, user manual
+
+
+Conclusion: The Incremental model is the most suitable because the system splits naturally into modules,
+the risk is medium and the college can give feedback after every release.
+
+
+ Memory tricks: Models W-P-S-I-A = "We Prefer Simple Incremental Approach" (Waterfall, Prototype, Spiral,
+ Incremental, Agile).
+ Factors S-C-R-C = Size, Complexity, Risk, Customer involvement ("Small College Rates Carefully").
+ Phases: Plan, 1, 2, 3, Deploy - plan once, then one increment per module group, then deploy.
+
+
+
+
+Q22. SRS for Hospital Management System (IEEE format)
+Question: Prepare an SRS for a Hospital Management System covering patient registration, appointment scheduling,
+doctor management, billing, pharmacy and medical records, following the IEEE SRS structure.
+
+1. Introduction
+     1.1 Purpose: This SRS describes the requirements of the Hospital Management System (HMS), to be used by
+      developers, testers and hospital management.
+     1.2 Scope: HMS automates patient registration, appointments, doctor management, billing, pharmacy and
+      medical records. It reduces paperwork and waiting time. It does not cover insurance claim processing or lab
+      machines (assumed).
+     1.3 Definitions: HMS: Hospital Management System. SRS: Software Requirements Specification. OPD: Out-
+      Patient Department. EMR: Electronic Medical Record.
+     1.4 References: IEEE Std 830 (SRS practice).
+     1.5 Overview: Section 2 describes the product, Section 3 the specific requirements.
+
+2. Overall description
+     2.1 Product perspective: a stand-alone web application with one central database.
+     2.2 Product functions: patient registration, appointment booking, doctor schedule management, billing,
+      pharmacy stock and sales, medical record storage.
+             User class                                                       Role
+    Receptionist                     Registers patients, books appointments
+    Doctor                           Views schedule, records diagnosis and prescriptions
+    Pharmacist                       Issues medicines, manages stock
+    Accountant                       Generates bills, takes payments
+    Admin                            Manages users, doctors, settings
+     2.3 Operating environment: browser-based, Windows or Linux server, MySQL database.
+     2.4 Assumptions and dependencies: hospital has internet or LAN; staff are trained; a payment gateway is
+      available.
+
+3. Functional requirements
+       ID                 Module                                               Requirement
+    FR1       Patient registration           The system shall register a new patient and give a unique Patient ID.
+    FR2       Patient registration           The system shall search and update patient details.
+    FR3       Appointment                    The system shall show available doctor slots and book, reschedule or cancel an
+                                             appointment.
+    FR4       Appointment                    The system shall send a confirmation SMS or email.
+    FR5       Doctor management              The system shall add, update and deactivate doctors and set their working
+                                             hours.
+    FR6       Billing                        The system shall generate a bill for consultation, tests and medicines.
+    FR7       Billing                        The system shall accept cash, card and UPI payments and print a receipt.
+    FR8       Pharmacy                       The system shall track medicine stock, expiry date and issue medicines against a
+                                             prescription.
+    FR9       Pharmacy                       The system shall alert when stock is below the minimum level.
+    FR10      Medical records                The system shall store diagnosis, prescriptions and reports of each patient and
+                                             show history to doctors.
+
+4. External interface requirements
+     User interface: simple web forms, role-based menus.
+
+      Hardware: PC, barcode scanner for medicines, receipt printer.
+      Software: MySQL database, SMS/email service, payment gateway.
+      Communication: HTTPS.
+
+5. Non-functional requirements and constraints (in S-P-R-U-C trick order)
+                  Type                                               Requirement
+    Security                  Login with roles; passwords encrypted; records visible only to authorised staff
+    Performance               A page loads within 3 seconds for 100 concurrent users (assumed)
+    Reliability               Daily backup; 99% availability
+    Usability                 A new receptionist should learn it in one day
+    Constraints               Must follow hospital data privacy rules; budget and time fixed by the hospital
+
+6. Assumptions
+Single hospital, English interface, one currency (INR).
+    Memory tricks: SRS headings I-O-F-I-N-A = Introduction, Overall description, Functional requirements, Interfaces
+    (external), Non-functional, Assumptions.
+    FR module order P-A-D-B-P-M = "Patients Ask Doctors Before Paying Money"; count check 2+2+1+2+2+1 = 10 FRs.
+    NFR order S-P-R-U-C = "Sick Patients Recover Under Care" (Security, Performance, Reliability, Usability,
+    Constraints). NFRs have no required order, so this order is safe to write.
+    Users R-D-P-A-A = Receptionist, Doctor, Pharmacist, Accountant, Admin.
+
+
+
+
+Q23. RMMM Plan for College ERP Development
+Question: Identify technical, operational, financial and security risks of developing a college ERP. Prepare a Risk Mitigation, Monitoring and Management (RMMM) plan.
+Risk Exposure (RE) = Probability x Impact. Probability is 0 to 1. Impact is 1 (low) to 5 (very high) (assumed scale). Higher RE means handle first.
+Ranking by RE: R1 (2.8) > R2 = R3 = R6 (2.0) > R4 (1.8) > R8 (1.5) > R5 (1.2) > R9 (1.0) > R7 (0.8). Rows below are in this order (highest risk first); R1 is shaded as the single biggest
+risk.
+   ID        Type                     Risk                 P        I    RE             Mitigation (AVOID)               Monitoring (WATCH)               Management (FIX)                   Owner
+   R1    Technical      Requirements change often         0.7   4       2.8   SRS sign-off; change control;            Change requests per        Freeze scope for this release;       Project manager
+                                                                              incremental delivery                     week                       push new items to next
+   R2    Technical      Module integration fails (fees,   0.5   4       2.0   Common database design; interfaces       Failed integration tests   Add integration buffer; senior       Tech lead
+                        exam, attendance)                                     agreed early; integration testing each                              developer fixes interfaces
+                                                                              sprint
+   R3    Technical      Poor performance at               0.4   5       2.0   Load testing; indexing; caching          Response time above 3      Add server capacity; limit           Tech lead
+                        admission / result time                                                                        s in tests                 concurrent logins
+   R6    Financial      Cost or schedule overrun          0.5   4       2.0   Realistic estimate with 15% buffer;      Planned vs actual effort   Reduce scope; add resources; re-     Project manager
+                                                                              weekly tracking                                                     plan
+   R4    Operational    Staff resist the new system or    0.6   3       1.8   Training sessions; user manual; early    Training attendance;       Extra training; helpdesk for first   Business analyst
+                        need training                                         demo                                     user complaints            month
+   R8    Security       Student data leak /               0.3   5       1.5   Role-based access; encryption;           Failed login logs; audit   Block accounts, change keys,         Security officer
+                        unauthorised access                                   security review                          report                     inform management
+   R5    Operational    Key developer leaves the team     0.3   4       1.2   Documentation; pair work; knowledge      Team attrition signs       Replace from backup resource;        Project manager
+                                                                              sharing                                                             hand-over
+   R9    Security       Data loss from server failure,    0.2   5       1.0   Daily backups; off-site copy             Backup success reports     Restore from latest backup           DBA
+                        no backup
+   R7    Financial      Budget cut or delayed             0.2   4       0.8   Milestone billing; keep management       Payment follow-ups         Slow down work; renegotiate          Project manager
+                        payment                                               informed                                                            scope
+
+Review: Risks are reviewed every week. Any risk whose RE goes above 2.5 is reported to the project manager. Closed risks are removed from the list.
+
+
+ Memory tricks: RMMM = Avoid, Watch, Fix (Mitigation = avoid it, Monitoring = watch the warning signs, Management = fix it if it happens).
+ Risk types T-O-F-S = Technical, Operational, Financial, Security ("Take Our Fears Seriously"). 9 risks = 3 Technical, 2 Operational, 2 Financial, 2 Security.
+
+
+
+
+Q25. Project Schedule for Student Management System
+Question: Prepare a project schedule including requirement analysis, design, coding, testing, deployment and
+maintenance. Estimate project metrics and prepare a Gantt chart.
+
+Step 1: Work Breakdown Structure (WBS)
+        Activity                    Task                                                Sub-tasks
+    A              Requirement analysis                 Meet users, list requirements, write SRS
+    B              System design                        Database design, module design, screen design
+    C              Backend + DB coding                  Student, course, attendance, marks, fees modules
+    D              UI coding                            Login, forms, dashboards, reports screens
+    E              Integration and testing              Unit, integration, system and user acceptance test
+    F              Deployment                           Install on server, data migration, training
+    G              Maintenance (first support)          Bug fixes, small changes
+
+Step 2: Activity table (durations in weeks, assumed)
+                   Activity         Duration         Depends on            Start              Finish       Slack
+                      A         2                none                 0                  2             0
+                      B         3                A                    2                  5             0
+                      C         4                B                    5                  9             0
+                      D         3                B                    5                  8             1
+                      E         2                C, D                 9                  11            0
+                      F         1                E                    11                 12            0
+                      G         2                F                    12                 14            0
+D is shaded: it is the only activity with slack (1 week), because C takes 4 weeks and D takes 3, so D can finish 1 week
+late without delaying testing.
+
+Step 3: Critical path and milestones
+        Critical path: A - B - C - E - F - G = 2 + 3 + 4 + 2 + 1 + 2 = 14 weeks.
+        Milestones: SRS signed (week 2), design approved (week 5), coding complete (week 9), testing complete
+         (week 11), go-live (week 12), support period ends (week 14).
+
+Step 4: Gantt chart
+
+
+
+
+How to draw it in the exam: x-axis = weeks 0 to 14, one row per activity, bar from Start to Finish with the duration
+written inside. Colour every bar except D the same; only C and D run in parallel (both start at week 5). Diamonds =
+milestones at weeks 2, 5, 9, 11, 12, 14.
+
+Step 5: Project metrics
+            Metric                        Value                                         How
+ Total duration               14 weeks                        Critical path length
+ Team size                    4 people                        Assumed
+ Effort                       36 person-weeks                 A 2x2, B 2x3, C 3x4, D 2x3, E 2x2, F 2x1, G 1x2 =
+                                                              4+6+12+6+4+2+2
+ Average staffing             36 / 14 = 2.6 people            Effort / duration
+ Critical activities          6 of 7                          All except D
+ Schedule variance (SV)       BCWP - BCWS                     Tracked weekly in practice
+Assumptions: weeks are working weeks; team of 4; maintenance shown as a 2-week initial support window,
+after which it continues as needed.
+
+
+ Memory tricks: Step order W-A-C-G-M = "Write All Charts, Graphs, Metrics" (WBS, Activity table, Critical path,
+ Gantt, Metrics).
+ Tasks R-S-B-U-T-D-M = "Really Smart Builders Use Tested Durable Materials" (Requirements, System design,
+ Backend, UI, Testing, Deployment, Maintenance).
+ Durations 2-3-4-3-2-1-2: climb 2-3-4, come down 3-2-1, then 2 weeks of support. Critical path sum skips D:
+ 2+3+4+2+1+2 = 14 weeks.
+ Slack: only D has slack - "D may Dally" by 1 week.
+
+
+
